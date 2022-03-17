@@ -1,89 +1,71 @@
-console.info("DOM MANIPULATION");
+console.info("DOM EVENTS");
 
 /*
-1. Manipulasi Element
-    -element.innerHTML = merubah isi
-    -element.style.<property css> = style
-    -element.setAttribute()
-        -setAttribute()
-        -getAttribute()
-        -removeAttribute() 
-    -element.classList
-        -classList.add()
-        -classList.remove()
-        -classList.toggle() jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus
-        -classList.item() untuk mengetahui kelas tertentu 
-        -classList.contains() ngecek dalam sebuah element punya apa tidak kelas terntu
-        -classList.replace() mengganti
-    -.....
-2. Manipulasi Node
-    - document.createElement()
-    - document.createTextNode()
-    - node.appendChild()
-    - node.insertBefore()
-    - parentNode.removeChild()
-    - parentNode.replaceChild()
-    -......
+    EVENTS != EVEN
+    1. event pada javascript merepresentasikan sebuah kejadian yang terjadi didalam DOM
+    2. kejadian tersebut bisa dilakukan user contoh(mouse event,keyboard event dll)
+    3. ataupun bisa dilakukan secara otomatis oleh api(animasi selesai dijalankan, halaman selesai di load, dll)
+
+    CARA 'MENDENGARKAN' (menjalankan) EVENT
+    1. EVENT HANDLER
+        - INLINE HTML ATTRIBUTE (lansung simpan di html line)
+        - ELEMENT METHOD
+    2. addEventListener()
+
+    CATATAN PENTING
+    1. JIKA MENGGUNAKAN EVENT HANDLER, JIKA MEMBUAT EVENT LAGI DIBAWAHNYA MAKA EVENT SEBELUMNYA TIDAK AKAN DIEKSEKUSI
+    2. JIKA MENGGUNAKAN ADDEVENT BERBEDA DENGAN EVENT HANDLER, JIKA MENGGUNAKAN ADDEVENT FUNGSI ATAU EVENT SEBELUMNYA TETAP BISA TERJALANKAN
+
+    MOUSE EVENT
+    1. CLICK
+    2. DBLCLICK
+    3. MOUSEOVER
+    4. MOUSEENTER
+    5. MOUSEUP
+    6. WHEEL
+    7. MOUSELEAVE
+    DLL
+
+    KEYBOARD EVENT
+    1. KEYDOWN
+    2. KEYPRESS
+    3. KEYUP
+
+    VIEW EVENT
+    1. RESIZE
+    2. SCROLL
+
+    FORM EVENT
+    1. RESET
+    2. SUBMIT
 */
 
-//contoh menambahkan paragraf baru
-{
-    const pBaru = document.createElement("p");//membuat paragraf baru
+ //event handler
 
-    //membuat isi paragraf
-    const textPBaru = document.createTextNode("Paragraf Baru Dari Js");
+    //inline html
 
-    //simpan tulisan ke dalam paragraf
-    pBaru.appendChild(textPBaru);
+     const p3 = document.querySelector(".p3");
 
-    //simpan di akhir section a
-    const sectionA = document.getElementById("a");
+     //kita panggil dan menyimpan function kedalam element di html
+     function ubahWarna(value) {
+         p3.style.backgroundColor = "blue";
+     }
+     function ubahWarna2(value) {
+         p2.style.backgroundColor = "blue";
+     }
 
-    // sectionA.akan_dimasukan_nilai(pBaru)
-    // pBaru akan disimpan di akhir sectionA
-    sectionA.appendChild(pBaru);
-    pBaru.style.backgroundColor = "Green"; 
+    //element method
 
-    
-}
-//menggunakan insertBefore
-{
-    //contoh lain
-    const liBaru = document.createElement("li");
-    const textLi = document.createTextNode("Item dari js");
-    liBaru.appendChild(textLi);
+     const p2 = document.querySelector(".p2");
+     p2.onclick = ubahWarna2;
 
-    const ul = document.querySelector("section#b ul");
-    const liBefore = ul.querySelector("li:nth-child(2)");
-    //element parent.insertBefore (yang ingin dimasukan, element sebelum)
-    ul.insertBefore(liBaru, liBefore);
-    liBaru.style.backgroundColor = "Green"; 
-
-}
-
-
-//remove
-{
-    const sectionA = document.getElementById("a");
-    const link = document.getElementsByTagName("a")[0];
-    // element parent.removechild(apa yang dihapsus)
-    sectionA.removeChild(link);
-
-}
-
-//replace
-{
-    const sectionB = document.getElementById("b");
-    const p4 = sectionB.querySelector("p");//pasti yang diambil yang pertama dari sectionB karna dibatasi scopenya
-
-    const h2Baru = document.createElement("h2");
-    const textH2 = document.createTextNode("Judul Dari Js");
-
-    h2Baru.appendChild(textH2);
-
-    // element parent.replaceChild(element baru, element yang diganti)
-    sectionB.replaceChild(h2Baru , p4);
-
-    h2Baru.style.backgroundColor = "Green"; 
-
-}
+//addEventListener
+     const p4 = document.querySelector("section#b p");
+     p4.addEventListener("click", function() {
+         const ul = document.querySelector("section#b ul");
+         const li = document.createElement("li");
+         const textLi = document.createTextNode("Item Baru");
+         
+         li.appendChild(textLi);
+         ul.appendChild(li);
+     });
