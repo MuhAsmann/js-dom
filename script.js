@@ -1,71 +1,67 @@
-console.info("DOM SELECTION METHOD");
+console.info("DOM MANIPULATION");
 
 /*
-
-getElementById() = element
-getElementByTagName() = HTML Collection
-getElementByClassName() = HTML Collection
-querySelector() = element
-querySelectorAll() = nodeList
-
+1. Manipulasi Element
+    -element.innerHTML = merubah isi
+    -element.style.<property css> = style
+    -element.setAttribute()
+        -setAttribute()
+        -getAttribute()
+        -removeAttribute() 
+    -element.classList
+        -classList.add()
+        -classList.remove()
+        -classList.toggle() jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus
+        -classList.item() untuk mengetahui kelas tertentu 
+        -classList.contains() ngecek dalam sebuah element punya apa tidak kelas terntu
+        -classList.replace() mengganti
+    -.....
+2. Manipulasi Node
 */
+
+//innerHTML
 {
-    //by Id
-    let nama = "Muhammad Asman"
-    let judul = document.getElementById("judul");
-    judul.style.color = "red";//merubah style
-    judul.style.backgroundColor = "green"; // merubah style
-    judul.innerHTML = `Haloo ${nama}`; //merubah isi tulisan
-    console.info(judul);
+    // const judul = document.getElementById("judul");
+    // judul.innerHTML = "<em>Dirubah Lewat Js</em>";//bisa masukan tag seperti pada biasanya
+
+    // const sectionA = document.querySelector("section#a");
+    // sectionA.innerHTML = "Hello World Dari JS";
 }
 
+//style.<properti>
 {
-    //byTagName
-    let p = document.getElementsByTagName("p");
+    const judul = document.getElementById("judul");
+    judul.style.color = "green";
+    judul.style.backgroundColor = "salmon";
 
-    //jika array gunakan index yang ingin di rubah style
-    p[1].style.backgroundColor = "green";
-    console.info(p);//htmlCollection
-
-    //contoh jika ingin mengambil langsung indexnya
-    const h1 = document.getElementsByTagName("h1")[0];
-    console.info(p);//htmlCollection
 }
 
+//setAttribute
 {
-    //byClassName
-    const p1 = document.getElementsByClassName("p1")[0];
-    p1.innerHTML = "ini dirubah dari js"
-    console.info(p1);//htmlCollection
+    //hati hati menggunakan set attribute, karna akan menimpa/menganti kelas yang ada
+    const judul = document.getElementsByTagName("h1")[0];
+    judul.setAttribute("name", "Asman");
+    console.info(judul.getAttribute("name"));//milhat isi attribute name
 }
 
+//classList
 {
-    // querySelector, hanya menyeleksi yang pertama dia temukan
-    const p4 = document.querySelector("#b p");
-    p4.style.color = "green";
-    p4.style.fontSize = "30px";
-    console.info(p4);
+    const p2 = document.querySelector(".p2");
+    p2.classList.add("label");//menambah
 
-    const li2 = document.querySelector("section#b ul li:nth-child(2)");
-    li2.style.color = "blue";
-console.info(li2);
+    p2.classList.remove("label");//menghapus
+    
+    p2.classList.toggle("label");//jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus 
+    
+    p2.classList.toggle("label");//jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus
+    
+    console.log(p2.classList.item(0));//akan mencari isi kelas sesuai dengna index
+    
+    console.log(p2.classList.contains("p2"));//akan bertanya ada apa tidak
+    
+    p2.classList.replace("p2", "asman");//akan mengganti
+    
+    console.log(p2.classList);
+
 }
 
-{
-    //querySelectorAll
-    let p = document.querySelectorAll("p");
-    // p[1].style.color = "blue";
-    //jika ingin mewarnai semua bisa gunakan for
-    for(let i = 0; i < p.length; i++){
-        p[i].style.backgroundColor = "blue"
-    }
-    console.info(p);
-}
-
-//mengubah node root
-{
-    const sectionB = document.getElementById("b");
-    const p4 = sectionB.getElementsByTagName("p")[0];
-    p4.style.backgroundColor = "yellow";
-    console.info(p4)
-}
