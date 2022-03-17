@@ -17,51 +17,73 @@ console.info("DOM MANIPULATION");
         -classList.replace() mengganti
     -.....
 2. Manipulasi Node
+    - document.createElement()
+    - document.createTextNode()
+    - node.appendChild()
+    - node.insertBefore()
+    - parentNode.removeChild()
+    - parentNode.replaceChild()
+    -......
 */
 
-//innerHTML
+//contoh menambahkan paragraf baru
 {
-    // const judul = document.getElementById("judul");
-    // judul.innerHTML = "<em>Dirubah Lewat Js</em>";//bisa masukan tag seperti pada biasanya
+    const pBaru = document.createElement("p");//membuat paragraf baru
 
-    // const sectionA = document.querySelector("section#a");
-    // sectionA.innerHTML = "Hello World Dari JS";
+    //membuat isi paragraf
+    const textPBaru = document.createTextNode("Paragraf Baru Dari Js");
+
+    //simpan tulisan ke dalam paragraf
+    pBaru.appendChild(textPBaru);
+
+    //simpan di akhir section a
+    const sectionA = document.getElementById("a");
+
+    // sectionA.akan_dimasukan_nilai(pBaru)
+    // pBaru akan disimpan di akhir sectionA
+    sectionA.appendChild(pBaru);
+    pBaru.style.backgroundColor = "Green"; 
+
+    
 }
-
-//style.<properti>
+//menggunakan insertBefore
 {
-    const judul = document.getElementById("judul");
-    judul.style.color = "green";
-    judul.style.backgroundColor = "salmon";
+    //contoh lain
+    const liBaru = document.createElement("li");
+    const textLi = document.createTextNode("Item dari js");
+    liBaru.appendChild(textLi);
 
-}
-
-//setAttribute
-{
-    //hati hati menggunakan set attribute, karna akan menimpa/menganti kelas yang ada
-    const judul = document.getElementsByTagName("h1")[0];
-    judul.setAttribute("name", "Asman");
-    console.info(judul.getAttribute("name"));//milhat isi attribute name
-}
-
-//classList
-{
-    const p2 = document.querySelector(".p2");
-    p2.classList.add("label");//menambah
-
-    p2.classList.remove("label");//menghapus
-    
-    p2.classList.toggle("label");//jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus 
-    
-    p2.classList.toggle("label");//jika belum ada maka akan dibuatkan, dan jika sudah ada akan dihapus
-    
-    console.log(p2.classList.item(0));//akan mencari isi kelas sesuai dengna index
-    
-    console.log(p2.classList.contains("p2"));//akan bertanya ada apa tidak
-    
-    p2.classList.replace("p2", "asman");//akan mengganti
-    
-    console.log(p2.classList);
+    const ul = document.querySelector("section#b ul");
+    const liBefore = ul.querySelector("li:nth-child(2)");
+    //element parent.insertBefore (yang ingin dimasukan, element sebelum)
+    ul.insertBefore(liBaru, liBefore);
+    liBaru.style.backgroundColor = "Green"; 
 
 }
 
+
+//remove
+{
+    const sectionA = document.getElementById("a");
+    const link = document.getElementsByTagName("a")[0];
+    // element parent.removechild(apa yang dihapsus)
+    sectionA.removeChild(link);
+
+}
+
+//replace
+{
+    const sectionB = document.getElementById("b");
+    const p4 = sectionB.querySelector("p");//pasti yang diambil yang pertama dari sectionB karna dibatasi scopenya
+
+    const h2Baru = document.createElement("h2");
+    const textH2 = document.createTextNode("Judul Dari Js");
+
+    h2Baru.appendChild(textH2);
+
+    // element parent.replaceChild(element baru, element yang diganti)
+    sectionB.replaceChild(h2Baru , p4);
+
+    h2Baru.style.backgroundColor = "Green"; 
+
+}
